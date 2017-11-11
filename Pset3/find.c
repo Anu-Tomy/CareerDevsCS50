@@ -40,7 +40,6 @@ int main(int argc, string argv[])
         {
             break;
         }
-
         // add hay to stack
         haystack[size] = straw;
     }

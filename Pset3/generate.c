@@ -50,7 +50,6 @@ int main(int argc, string argv[])
     {
         printf("%i\n", (int) (drand48() * LIMIT));
     }
-
     // success
     return 0;
 }
