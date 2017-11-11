@@ -36,16 +36,16 @@ int main(void)
 int bubblesort(int array[],int num)
 {
  int swap;
- for (int i = 0; i < num-1; i++)
+ for (int i = 0; i < num - 1; i++)
  {
-  for (int j = 0; j < (num-i)-1; j++)
+  for (int j = 0; j < (num - i)-1; j++)
   {
    //Compare the adjacent positions
-    if(array[j] > array[j+1])
+    if(array[j] > array[j + 1])
      {
           swap = array[j];
-          array[j] = array[j+1];
-          array[j+1] = swap;
+          array[j] = array[j + 1];
+          array[j + 1] = swap;
      }
    }
  }

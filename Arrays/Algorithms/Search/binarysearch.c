@@ -7,7 +7,7 @@ int main(void)
     printf("Enter maximum no.of array elements: ");
     n = get_int();
     printf("Enter array elements: \n");
-    for (i =0; i < n; i++)
+    for (i = 0; i < n; i++)
     {
         array[i] = get_int();
     }
@@ -28,11 +28,17 @@ int main(void)
         {
             mid = (start+end)/2;
             if(s == array[mid])
+            {
                 return true;
+            }
             else if(s<array[mid])
+            {
                 end = mid-1;
+            }
                 else
+                {
                     start = mid + 1;
+                }
         }
         return false;
 
