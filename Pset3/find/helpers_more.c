@@ -16,7 +16,10 @@ bool search(int value, int values[], int n)
 //Using binary search
 {
     int start = 0, end = n-1, mid;
-
+    if (n < 0)
+    {
+        return false;
+    }
     while (start <= end)
     {
         mid = (start + end) / 2;
