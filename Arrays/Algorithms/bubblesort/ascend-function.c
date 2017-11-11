@@ -48,6 +48,6 @@ int bubblesort(int array[],int num)
           array[j+1] = swap;
      }
    }
-}
+ }
   return 0;
 }
