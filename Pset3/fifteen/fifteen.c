@@ -162,7 +162,7 @@ void init(void)
     //[8 7 6]
     //[5 4 3]
     //[2 1 0]
-    int tileStart_num = (d * d) -1;
+    int tileStart_num = (d * d) - 1;
     for (int i = 0; i < d; i++)
     {
         for (int j = 0; j < d; j++)
@@ -170,6 +170,7 @@ void init(void)
             board[i][j] = tileStart_num;
             tileStart_num--;
         }
+        //if dimension is an even number, then swap the last and second last tile.
         if ( d % 2 == 0)
         {
             int temp = board[d - 1][d - 2];
@@ -177,8 +178,6 @@ void init(void)
             board[d - 1][d - 3] = temp;
         }
     }
-
-
 }
 
 /**
@@ -208,10 +207,72 @@ void draw(void)
  * If tile borders empty space, moves tile and returns true, else
  * returns false.
  */
+// TODO
 bool move(int tile)
 {
-    // TODO
-    return false;
+    //validation for the tile to move
+    if(tile > ((d * d)- 1) || tile < 0)
+    {
+      return false;
+    }
+
+    int blank_tile = 0;
+
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+           if(board[i][j] == tile)
+           {
+                //tile(3) is on top of blank
+                //[8 7 6]
+                //[5 4 3]
+                //[2 1 -]
+                if(board[i + 1][j] == blank_tile)
+                {
+                    // switch blank and tile
+                    board[i + 1][j] = tile;
+                    board[i][j] = blank_tile;
+                    return true;
+                }
+                //tile(3) is under the blank
+                //[8 7 6 ]
+                //[5 4 - ]
+                //[2 1 3 ]
+                if(board[i - 1][j] == blank_tile)
+                {
+                    // switch blank and tile
+                    board[i - 1][j] = tile;
+                    board[i][j] = blank_tile;
+                    return true;
+                }
+               //tile(3) is left of the blank
+                //[8 7 6 ]
+                //[3 - 5 ]
+                //[4 2 1 ]
+                if(board[i][j + 1] == blank_tile)
+                {
+                    // switch blank and tile
+                    board[i][j + 1] = tile;
+                    board[i][j] = blank_tile;
+                    return true;
+               }
+               //tile(3) is right of the blank
+                //[8 7 6 ]
+                //[- 3 5 ]
+                //[4 2 1 ]
+                if(board[i][j - 1] == blank_tile)
+                {
+                    // switch blank and tile
+                    board[i][j - 1] = tile;
+                    board[i][j] = blank_tile;
+                    return true;
+                }
+            }
+        }
+    }
+
+   return false;
 }
 
 /**
@@ -221,5 +282,27 @@ bool move(int tile)
 bool won(void)
 {
     // TODO
+int counter = 1;
+
+    //iterate over board
+    //if d is 3, last index is [2][2]) and if it is blank, return true
+
+    for(int i = 0; i < d; i++)
+    {
+        for(int j = 0; j < d; j++)
+        {
+            if(board[i][j] == counter)
+            {
+                counter++;
+
+                if(counter == d * d && board[d - 1][d - 1] == 0)
+                {
+
+                    return true;
+                }
+            }
+        }
+    }
+
     return false;
 }
