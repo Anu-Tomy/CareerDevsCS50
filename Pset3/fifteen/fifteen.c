@@ -167,7 +167,7 @@ void init(void)
     {
         for (int j = 0; j < d; j++)
         {
-            board[i][j] = tileStart_num;
+            board[i][j] = tileStart_num ;
             tileStart_num--;
         }
         //if dimension is an even number, then swap the last and second last tile.
@@ -190,7 +190,7 @@ void draw(void)
     {
         for (int j = 0; j< d; j++)
         {
-           if(board[i][j] == 0)
+           if (board[i][j] == 0)
            {
                printf("  _ ");
            }
@@ -211,68 +211,73 @@ void draw(void)
 bool move(int tile)
 {
     //validation for the tile to move
-    if(tile > ((d * d)- 1) || tile < 0)
+    if (tile > ((d * d) - 1) || tile < 0)
     {
-      return false;
+        return false;
     }
 
     int blank_tile = 0;
+    int temp;
 
     for (int i = 0; i < d; i++)
     {
         for (int j = 0; j < d; j++)
         {
-           if(board[i][j] == tile)
+           if (board[i][j] == tile)
            {
                 //tile(3) is on top of blank
                 //[8 7 6]
                 //[5 4 3]
                 //[2 1 -]
-                if(board[i + 1][j] == blank_tile)
+                if (board[i + 1][j] == blank_tile && (i + 1) < d)
                 {
                     // switch blank and tile
+                    temp = blank_tile;
                     board[i + 1][j] = tile;
-                    board[i][j] = blank_tile;
+                    board[i][j] = temp;
                     return true;
                 }
                 //tile(3) is under the blank
                 //[8 7 6 ]
                 //[5 4 - ]
                 //[2 1 3 ]
-                if(board[i - 1][j] == blank_tile)
+                else if (board[i - 1][j] == blank_tile && (i - 1) >= 0)
                 {
                     // switch blank and tile
+                    temp = blank_tile;
                     board[i - 1][j] = tile;
-                    board[i][j] = blank_tile;
+                    board[i][j] = temp;
                     return true;
                 }
-               //tile(3) is left of the blank
+                //tile(3) is left of the blank
                 //[8 7 6 ]
                 //[3 - 5 ]
                 //[4 2 1 ]
-                if(board[i][j + 1] == blank_tile)
+                else if (board[i][j + 1] == blank_tile && (j + 1) < d)
                 {
                     // switch blank and tile
+                    temp = blank_tile;
                     board[i][j + 1] = tile;
-                    board[i][j] = blank_tile;
+                    board[i][j] = temp;
                     return true;
-               }
-               //tile(3) is right of the blank
+                }
+                //tile(3) is right of the blank
                 //[8 7 6 ]
                 //[- 3 5 ]
                 //[4 2 1 ]
-                if(board[i][j - 1] == blank_tile)
+                else if (board[i][j - 1] == blank_tile && (j - 1) >= 0)
                 {
                     // switch blank and tile
+                    temp = blank_tile;
                     board[i][j - 1] = tile;
-                    board[i][j] = blank_tile;
+                    board[i][j] = temp;
                     return true;
                 }
             }
         }
     }
 
-   return false;
+    return false;
 }
 
 /**
@@ -282,20 +287,20 @@ bool move(int tile)
 bool won(void)
 {
     // TODO
-int counter = 1;
+    int counter = 1;
 
     //iterate over board
     //if d is 3, last index is [2][2]) and if it is blank, return true
 
-    for(int i = 0; i < d; i++)
+    for (int i = 0; i < d; i++)
     {
-        for(int j = 0; j < d; j++)
+        for (int j = 0; j < d; j++)
         {
-            if(board[i][j] == counter)
+            if (board[i][j] == counter)
             {
                 counter++;
 
-                if(counter == d * d && board[d - 1][d - 1] == 0)
+                if (counter == d * d && board[d - 1][d - 1] == 0)
                 {
 
                     return true;
