@@ -7,6 +7,7 @@
 
 #include "dictionary.h"
 
+//trie node
 typedef struct node
 {
     bool is_word;
@@ -24,7 +25,8 @@ bool unload_dict(node *node_ptr);
 // Returns true if word is in dictionary else return false
 bool check(const char *word)
 {
-    node *node_ptr = root;
+    node *node_ptr = root; //pointer to root node
+
     for (int i = 0, len = strlen(word); i <= len; i++)
     {
         if (word[i] == '\0')
@@ -40,7 +42,7 @@ bool check(const char *word)
         }
 
         int index = get_index(word[i]);
-        if (node_ptr->children[index] == NULL)//word is misspelled
+        if (node_ptr->children[index] == NULL) //word is misspelled
         {
           return false;
         }
